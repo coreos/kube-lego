@@ -153,6 +153,7 @@ func (a *Acme) ObtainCertificate(domains []string) (data map[string][]byte, err 
 			results[pos] = err
 
 			log.Infof("authorization successful")
+			log.Infof("curtis was here")
 		}(pos, domain)
 	}
 
