@@ -164,11 +164,11 @@ func (a *Acme) ObtainCertificate(domains []string) (data map[string][]byte, err 
 	successfulDomains := make([]string, len(domains))
 	failedDomains := make([]string, len(domains))
 	for pos, domain := range domains {
-		res := results[pos]
-		if res != nil {
-			successfulDomains = append(successfulDomains, domain)
-		} else {
+		err := results[pos]
+		if err != nil {
 			failedDomains = append(failedDomains, domain)
+		} else {
+			successfulDomains = append(successfulDomains, domain)
 		}
 	}
 
