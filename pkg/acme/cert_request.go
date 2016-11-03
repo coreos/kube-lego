@@ -13,11 +13,12 @@ import (
 	"net/url"
 	"sync"
 
+	"time"
+
 	"github.com/cenk/backoff"
 	"github.com/jetstack/kube-lego/pkg/kubelego_const"
 	"golang.org/x/crypto/acme"
 	"golang.org/x/net/context"
-	"time"
 )
 
 func (a *Acme) ensureAcmeClient() error {
@@ -180,6 +181,7 @@ func (a *Acme) ObtainCertificate(domains []string) (data map[string][]byte, err 
 	// TODO: Mark failed domains as failed in ingress
 
 	domains = successfulDomains
+	a.Log().WithField("successful_domains", domains).Warnf("successful domanis: %#v", domains)
 
 	template := x509.CertificateRequest{
 		Subject: pkix.Name{

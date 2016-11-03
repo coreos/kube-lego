@@ -120,7 +120,6 @@ func (kl *KubeLego) Reconfigure() error {
 	if err != nil {
 		return err
 	}
-
 	return kl.reconfigure(ingressesAll)
 }
 
