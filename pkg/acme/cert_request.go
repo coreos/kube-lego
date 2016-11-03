@@ -163,8 +163,9 @@ func (a *Acme) ObtainCertificate(domains []string) (data map[string][]byte, err 
 	wg.Wait()
 
 	// check if all the domains are authorized correctly
-	successfulDomains := make([]string, len(domains))
-	failedDomains := make([]string, len(domains))
+	// TODO(cgag): they can't both be len(domains).
+	successfulDomains := make([]string, 0)
+	failedDomains := make([]string, 0)
 	for pos, domain := range domains {
 		err := results[pos]
 		if err != nil {
