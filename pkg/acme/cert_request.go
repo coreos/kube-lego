@@ -156,6 +156,8 @@ func (a *Acme) ObtainCertificate(domains []string) (data map[string][]byte, err 
 			log.Infof("curtis was here")
 		}(pos, domain)
 	}
+	// TODO(cgag): why do i keep getting unreachability
+	// TODO(cgag0: where is the blank "" domain coming from?
 
 	// wait for all authorizations to complete
 	wg.Wait()

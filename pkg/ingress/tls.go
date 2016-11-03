@@ -8,10 +8,11 @@ import (
 	"github.com/jetstack/kube-lego/pkg/utils"
 
 	"fmt"
+	"strings"
+
 	"github.com/Sirupsen/logrus"
 	k8sApi "k8s.io/kubernetes/pkg/api"
 	k8sExtensions "k8s.io/kubernetes/pkg/apis/extensions"
-	"strings"
 )
 
 var _ kubelego.Tls = &Tls{}
@@ -112,6 +113,7 @@ func (i *Tls) Process() error {
 func (i *Tls) RequestCert() error {
 
 	i.Log().Infof("requesting certificate for %s", strings.Join(i.Hosts(), ","))
+	i.Log().Infof("requesting certificate for %#v", i.Hosts())
 
 	certData, err := i.ingress.KubeLego().AcmeClient().ObtainCertificate(
 		i.Hosts(),
